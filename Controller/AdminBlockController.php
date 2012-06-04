@@ -78,7 +78,7 @@ class AdminBlockController extends Controller
     }
 
     /**
-     * @Template()
+     *
      */
     public function configureAction(Block $block, Request $request)
     {
@@ -94,7 +94,10 @@ class AdminBlockController extends Controller
             }
         }
 
-        return array('block' => $block, 'block_type' => $blockType, 'form' => $form->createView());
+        return $this->render(
+            isset($blockType['form_template']) ? $blockType['form_template'] : 'SoloistBlockBundle:AdminBlock:configure.html.twig',
+            array('block' => $block, 'block_type' => $blockType, 'form' => $form->createView())
+        );
     }
 
     public function sortAction(Block $block, Request $request)

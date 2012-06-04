@@ -4,7 +4,9 @@
 <form method="POST" action="{{ path('soloist_admin_block_block_configure', block.routeParams) }}">
     <div class="modal-body">
         <fieldset>
-            {{ form_rest(form) }}
+            {% block form %}
+                {{ form_rest(form) }}
+            {% endblock %}
         </fieldset>
     </div>
     <div class="modal-footer">

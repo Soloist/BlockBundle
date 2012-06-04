@@ -1,0 +1,22 @@
+{% for block in page.blocks %}
+
+    <div class="thumbnail" data-sort-uri="{{ path('soloist_admin_block_block_sort', block.routeParams) }}">
+        <div class="caption">
+            <h4>{{ manager.getBlockType(block.type).name }}</h4>
+            <div class="actions">
+                <a href="{{ path('soloist_admin_block_block_delete', block.routeParams) }}"
+                   class="btn btn-mini btn-danger delete pull-right">
+                    <i class="icon-trash icon-white"></i>
+                    Supprimer
+                </a>
+                <a href="{{ path('soloist_admin_block_block_configure', block.routeParams) }}"
+                   class="btn btn-mini configure pull-right">
+                    <i class="icon-edit"></i>
+                    Configurer
+                </a>
+            </div>
+            <hr />
+        </div>
+    </div>
+
+{% endfor %}

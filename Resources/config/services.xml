@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+
+    <parameters>
+        <parameter key="soloist.block.listener.menu.class">Soloist\Bundle\BlockBundle\EventListener\DashboardListener</parameter>
+        <parameter key="soloist.block.listener.core.class">Soloist\Bundle\BlockBundle\EventListener\SoloistCoreListener</parameter>
+        <parameter key="soloist.block.manager.class">Soloist\Bundle\BlockBundle\Manager\Block</parameter>
+        <parameter key="soloist.block.page.manager.class">Soloist\Bundle\BlockBundle\Manager\Page</parameter>
+    </parameters>
+
+    <services>
+        <service id="soloist.block.listener.menu" class="%soloist.block.listener.menu.class%">
+            <tag name="kernel.event_listener" event="fw_dashboard.configure.menu.top"  method="onConfigureTopMenu" />
+        </service>
+        <service id="soloist.block.listener.core" class="%soloist.block.listener.core.class%">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <tag name="kernel.event_listener" event="soloist.core.request_action"  method="onRequestAction" />
+        </service>
+        <service id="soloist.block.manager" class="%soloist.block.manager.class%">
+            <argument type="service" id="event_dispatcher" />
+        </service>
+        <service id="soloist.block.page.manager" class="%soloist.block.page.manager.class%" />
+    </services>
+
+</container>

@@ -1,0 +1,14 @@
+<div class="modal-header">
+    <h3>Configuration du bloc "{{ block_type.name }}"</h3>
+</div>
+<form method="POST" action="{{ path('soloist_admin_block_block_configure', block.routeParams) }}">
+    <div class="modal-body">
+        <fieldset>
+            {{ form_rest(form) }}
+        </fieldset>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Valider</button>
+        <a id="configure-close" class="btn">Annuler</a>
+    </div>
+</form>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="soloist_admin_block_page_index" pattern="/admin/soloist/block/page">
+        <default key="_controller">SoloistBlockBundle:AdminPage:index</default>
+    </route>
+    <route id="soloist_admin_block_page_new" pattern="/admin/soloist/block/page/new">
+        <default key="_controller">SoloistBlockBundle:AdminPage:new</default>
+        <requirement key="_method">GET</requirement>
+    </route>
+    <route id="soloist_admin_block_page_create" pattern="/admin/soloist/block/page/new">
+        <default key="_controller">SoloistBlockBundle:AdminPage:create</default>
+        <requirement key="_method">POST</requirement>
+    </route>
+    <route id="soloist_admin_block_page_edit" pattern="/admin/soloist/block/page/edit/{id}">
+        <default key="_controller">SoloistBlockBundle:AdminPage:edit</default>
+        <requirement key="_method">GET</requirement>
+    </route>
+    <route id="soloist_admin_block_page_update" pattern="/admin/soloist/block/page/edit/{id}">
+        <default key="_controller">SoloistBlockBundle:AdminPage:update</default>
+        <requirement key="_method">POST</requirement>
+    </route>
+    <route id="soloist_admin_block_page_delete" pattern="/admin/soloist/block/page/delete/{id}">
+        <default key="_controller">SoloistBlockBundle:AdminPage:delete</default>
+        <requirement key="_method">GET</requirement>
+    </route>
+
+    <route id="soloist_admin_block_block_index" pattern="/admin/soloist/block/block/{id}">
+        <default key="_controller">SoloistBlockBundle:AdminBlock:index</default>
+        <requirement key="_method">GET</requirement>
+    </route>
+    <route id="soloist_admin_block_block_add" pattern="/admin/soloist/block/block/{id}/add">
+        <default key="_controller">SoloistBlockBundle:AdminBlock:add</default>
+        <requirement key="_method">POST</requirement>
+    </route>
+    <route id="soloist_admin_block_block_delete" pattern="/admin/soloist/block/block/{id}/delete">
+        <default key="_controller">SoloistBlockBundle:AdminBlock:delete</default>
+        <requirement key="_method">GET</requirement>
+    </route>
+    <route id="soloist_admin_block_block_configure" pattern="/admin/soloist/block/block/{id}/configure">
+        <default key="_controller">SoloistBlockBundle:AdminBlock:configure</default>
+        <requirement key="_method">GET|POST</requirement>
+    </route>
+    <route id="soloist_admin_block_block_sort" pattern="/admin/soloist/block/block/{id}/sort">
+        <default key="_controller">SoloistBlockBundle:AdminBlock:sort</default>
+        <requirement key="_method">GET</requirement>
+    </route>
+</routes>

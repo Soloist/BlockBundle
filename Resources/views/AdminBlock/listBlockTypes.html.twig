@@ -1,0 +1,29 @@
+{% set i = 0 %}
+
+{% macro close_row(i) %}
+    {% if i != 0 and i % 3 == 0 %}
+        </div>
+        <div class="row-fluid">
+    {% endif %}
+{% endmacro %}
+
+<div class="row-fluid">
+    {% for type, params in blocks%}
+        {{ _self.close_row(i) }}{% set i = i + 1 %}
+        <div class="span4">
+            <div class="draggable-block thumbnail">
+                <div class="caption">
+                    <h4>{{ params.name }}</h4>
+                    <form>
+                        <input type="hidden" name="type"   value="{{ type }}" />
+                        <input type="hidden" name="action" value="{{ params.action }}" />
+                        {% for setting, value in params.settings %}
+                            <input type="hidden" name="settings[{{ setting }}]" value="{{ value }}" />
+                        {% endfor %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+

@@ -1,0 +1,35 @@
+{% extends 'FrequenceWebDashboardBundle::admin.html.twig' %}
+
+{% block body %}
+    <h1>Gestion des pages-blocs</h1>
+
+    <div class="row-fluid" id="soloist-block-blocks">
+
+        <div class="span5">
+            <h2>Blocs</h2>
+            <div class="well" id="block-container">
+                {% render 'SoloistBlockBundle:AdminBlock:getBlocks' with { page: page } %}
+            </div>
+        </div>
+
+        <div class="span7">
+            <h2>Bibliothèque</h2>
+            <div id="block-library">
+                {% render 'SoloistBlockBundle:AdminBlock:listBlockTypes' %}
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+{%- javascripts '@SoloistBlockBundle/Resources/coffee/*.coffee' filter="coffee, ?yui_js" %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{%- endjavascripts %}
+<script type="text/javascript">
+    new window.soloist.BlockManager({
+        'addUri':  '{{ path('soloist_admin_block_block_add', page.routeParams) }}'
+    });
+</script>
+{% endblock %}

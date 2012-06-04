@@ -12,6 +12,7 @@ class window.soloist.BlockConfigurator
 
     init: () ->
         self = this;
+        window.soloist.addMediaManagerEvents() if window.soloist.addMediaManagerEvents?
 
         @$modal.find('#configure-close').click ->
             self.$modal.modal('hide')

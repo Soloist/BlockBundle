@@ -10,9 +10,15 @@
         </id>
         <field name="template"     column="template"      type="string"   />
         <field name="name"         column="name"          type="string"   />
+
+        <field name="slug"         column="slug"          type="string" length="150" unique="true">
+            <gedmo:slug unique="true" style="default" updatable="false" separator="-" fields="name" />
+        </field>
+
         <field name="createdAt"    column="created_at"    type="datetime"  >
             <gedmo:timestampable on="create"/>
         </field>
+
         <field name="updatedAt"    column="updated_at"    type="datetime"  >
             <gedmo:timestampable on="update"/>
         </field>

@@ -2,18 +2,21 @@
 
 namespace Soloist\Bundle\BlockBundle\Controller;
 
-use Soloist\Bundle\BlockBundle\Entity\Page,
-    Soloist\Bundle\BlockBundle\Entity\Block;
-
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template,
-    Symfony\Bundle\FrameworkBundle\Controller\Controller,
-    Symfony\Component\HttpFoundation\Response,
-    Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Soloist\Bundle\BlockBundle\Entity\Block;
+use Soloist\Bundle\BlockBundle\Entity\Page;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class AdminBlockController extends Controller
 {
     /**
-     * @Template()
+     * @Template
+     *
+     * @param  Page  $page
+     *
+     * @return array
      */
     public function indexAction(Page $page)
     {
@@ -31,7 +34,11 @@ class AdminBlockController extends Controller
     }
 
     /**
-     * @Template()
+     * @Template
+     *
+     * @param  Page  $page
+     *
+     * @return array
      */
     public function getBlocksAction(Page $page)
     {
@@ -39,16 +46,24 @@ class AdminBlockController extends Controller
     }
 
     /**
-     * @Template()
+     * @Template
+     *
+     * @return array
      */
     public function listBlockTypesAction()
     {
         return array('blocks' => $this->get('soloist.block.manager')->getBlockTypes());
     }
 
+    /**
+     * @param  Page     $page
+     * @param  Request  $request
+     *
+     * @return Response
+     */
     public function addAction(Page $page, Request $request)
     {
-        $em    = $this->getDoctrine()->getEntityManager();
+        $em    = $this->getDoctrine()->getManager();
         $block = Block::createFromData($page, $request->request->all());
         $em->persist($block);
         $em->flush();
@@ -66,11 +81,15 @@ class AdminBlockController extends Controller
 
     /**
      * @Template("SoloistBlockBundle:AdminBlock:getBlocks.html.twig")
+     *
+     * @param  Block         $block
+     *
+     * @return array<string>
      */
     public function deleteAction(Block $block)
     {
         $page = $block->getPage();
-        $em   = $this->getDoctrine()->getEntityManager();
+        $em   = $this->getDoctrine()->getManager();
         $em->remove($block);
         $em->flush();
 
@@ -78,7 +97,10 @@ class AdminBlockController extends Controller
     }
 
     /**
+     * @param  Block    $block
+     * @param  Request  $request
      *
+     * @return Response
      */
     public function configureAction(Block $block, Request $request)
     {
@@ -90,7 +112,7 @@ class AdminBlockController extends Controller
             $form->bindRequest($request);
             if ($form->isValid()) {
                 $block->setSettings($form->getData());
-                $this->getDoctrine()->getEntityManager()->flush();
+                $this->getDoctrine()->getManager()->flush();
             }
         }
 
@@ -100,11 +122,17 @@ class AdminBlockController extends Controller
         );
     }
 
+    /**
+     * @param  Block    $block
+     * @param  Request  $request
+     *
+     * @return Response
+     */
     public function sortAction(Block $block, Request $request)
     {
         $position = $request->query->get('position', 0);
         $block->setPosition($position);
-        $this->getDoctrine()->getEntityManager()->flush();
+        $this->getDoctrine()->getManager()->flush();
 
         return new Response(json_encode(array('success' => true)));
     }

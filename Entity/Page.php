@@ -2,9 +2,8 @@
 
 namespace Soloist\Bundle\BlockBundle\Entity;
 
-use FrequenceWeb\Bundle\DashboardBundle\Crud\CrudableInterface;
-
 use Doctrine\Common\Collections\ArrayCollection;
+use FrequenceWeb\Bundle\DashboardBundle\Crud\CrudableInterface;
 
 class Page implements CrudableInterface
 {
@@ -28,7 +27,14 @@ class Page implements CrudableInterface
     protected $name;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection
+     * The page slug
+     *
+     * @var string
+     */
+    protected $slug;
+
+    /**
+     * @var ArrayCollection
      */
     protected $blocks;
 
@@ -88,6 +94,22 @@ class Page implements CrudableInterface
     }
 
     /**
+     * @param string $slug
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
      * @return \DateTime
      */
     public function getCreatedAt()
@@ -103,6 +125,9 @@ class Page implements CrudableInterface
         return $this->updatedAt;
     }
 
+    /**
+     * @return array
+     */
     public function getRouteParams()
     {
         return array(
@@ -110,6 +135,11 @@ class Page implements CrudableInterface
         );
     }
 
+    /**
+     * @param  Block $block
+     *
+     * @return Page
+     */
     public function addBlock(Block $block)
     {
         $this->blocks[] = $block;
@@ -119,11 +149,10 @@ class Page implements CrudableInterface
     }
 
     /**
-     * @return \Doctrine\Common\Collections\ArrayCollection
+     * @return ArrayCollection
      */
     public function getBlocks()
     {
         return $this->blocks;
     }
-
 }

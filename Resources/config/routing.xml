@@ -48,4 +48,10 @@
         <default key="_controller">SoloistBlockBundle:AdminBlock:sort</default>
         <requirement key="_method">GET</requirement>
     </route>
+
+    <route id="soloist_block_show" pattern="/spb/{slug}.html">
+        <default key="_controller">SoloistBlockBundle:Default:show</default>
+        <requirement key="_method">GET</requirement>
+        <requirement key="slug">.*</requirement>
+    </route>
 </routes>

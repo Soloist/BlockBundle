@@ -10,6 +10,7 @@
         <parameter key="soloist.block.listener.core.class">Soloist\Bundle\BlockBundle\EventListener\SoloistCoreListener</parameter>
         <parameter key="soloist.block.manager.class">Soloist\Bundle\BlockBundle\Manager\Block</parameter>
         <parameter key="soloist.block.page.manager.class">Soloist\Bundle\BlockBundle\Manager\Page</parameter>
+        <parameter key="soloist.block.listener.block.class">Soloist\Bundle\BlockBundle\EventListener\BlockListener</parameter>
     </parameters>
 
     <services>
@@ -24,6 +25,9 @@
             <argument type="service" id="event_dispatcher" />
         </service>
         <service id="soloist.block.page.manager" class="%soloist.block.page.manager.class%" />
+        <service id="soloist.block.listener.block" class="%soloist.block.listener.block.class%">
+            <tag name="kernel.event_listener" event="soloist_block.request_types"  method="onRequestTypes" />
+        </service>
     </services>
 
 </container>
